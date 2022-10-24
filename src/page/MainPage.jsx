@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   auditionMockData,
   actorMockData,
@@ -7,24 +7,30 @@ import {
 import styled from 'styled-components';
 
 const MainPage = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slideRef = useRef();
+
+  useEffect(() => {
+    slideRef.current.style.transition = '0.5s';
+    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
+  }, [currentSlide]);
+
   return (
     <MainPageWrap>
       {/* banner section */}
-      <BannerWrap>
-        <Banner>
-          <img src='image/banner3.png' alt='banner-img' />
-        </Banner>
-        <Banner>
-          <img src='image/banner1.png' alt='banner-img' />
-        </Banner>
-        <Banner>
-          <img src='image/banner2.png' alt='banner-img' />
-        </Banner>
-      </BannerWrap>
+      <BannerContainer>
+        <BannerWrap ref={slideRef}>
+          <Banner src='image/banner3.png' alt='banner-img' />
+          <Banner src='image/banner2.png' alt='banner-img' />
+          <Banner src='image/banner1.png' alt='banner-img' />
+        </BannerWrap>
+      </BannerContainer>
+
       <ButtonWrap>
-        <button></button>
-        <button></button>
-        <button></button>
+        <button onClick={() => setCurrentSlide(0)} />
+        <button onClick={() => setCurrentSlide(1)} />
+        <button onClick={() => setCurrentSlide(2)} />
       </ButtonWrap>
       <NoticeWrap>
         <button>공지사항</button>
@@ -172,19 +178,45 @@ const MainPageWrap = styled.div`
   width: 100%;
   margin: 100px auto 70px auto;
 `;
-const BannerWrap = styled.div`
-  width: 1060px;
+
+const BannerContainer = styled.div`
+  width: 1050px;
   overflow-x: hidden;
-  display: flex;
   margin: 0 auto;
+  border-radius: 20px;
+
+  @media screen and (max-width: 1400px) {
+    width: 76%;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    border-radius: 10px;
+  }
 `;
 
-const Banner = styled.div`
-  width: 1060px;
+const BannerWrap = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 5px;
+  width: 100%;
+
+  @media screen and (max-width: 1400px) {
+    width: 100%;
+  }
+`;
+
+const Banner = styled.img`
+  width: 1050px;
+  display: flex;
+  margin: 0;
+
+  @media screen and (max-width: 1400px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const ButtonWrap = styled.div`
@@ -235,12 +267,33 @@ const NoticeWrap = styled.div`
     color: #ffffff;
     font-weight: 600;
   }
+
+  @media screen and (max-width: 1400px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+
+    div {
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+  }
 `;
 
 const AuditionWrap = styled.div`
   position: relative;
   width: 1060px;
   margin: 50px auto 50px auto;
+
+  @media screen and (max-width: 1400px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const Title = styled.div`
@@ -249,6 +302,15 @@ const Title = styled.div`
   font-weight: 600;
   color: #000000;
   margin-bottom: 10px;
+
+  @media screen and (max-width: 1400px) {
+    font-size: 3vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 22px;
+    margin-left: 10px;
+  }
 `;
 
 const Text = styled.div`
@@ -257,6 +319,15 @@ const Text = styled.div`
   font-weight: 400;
   color: #666666;
   margin-bottom: 30px;
+
+  @media screen and (max-width: 1400px) {
+    font-size: 1.5vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 13px;
+    margin-left: 10px;
+  }
 `;
 
 const SideButton = styled.button`
@@ -273,6 +344,16 @@ const SideButton = styled.button`
   border-radius: 10px;
   transform: translate(-100%, -10%);
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 3px;
+
+  @media screen and (max-width: 1400px) {
+    width: 15vw;
+    height: 4vw;
+    font-size: 1.4vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const AuditionBlockWrap = styled.div`
@@ -280,6 +361,10 @@ const AuditionBlockWrap = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 49% 49%;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 100%;
+  }
 `;
 
 const AuditionBlock = styled.div`
@@ -291,11 +376,30 @@ const AuditionBlock = styled.div`
   display: flex;
   align-items: center;
 
+  @media screen and (max-width: 1400px) {
+    height: 20vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    height: 150px;
+  }
+
   img {
     width: 190px;
     height: 190px;
     margin-left: 20px;
     border-radius: 15px;
+
+    @media screen and (max-width: 1400px) {
+      width: 15vw;
+      height: 15vw;
+      margin-right: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 120px;
+      height: 120px;
+    }
   }
 `;
 
@@ -312,6 +416,14 @@ const AuditionContentsBlock = styled.div`
     font-family: SUIT-Medium;
     border-radius: 5px;
     margin-left: 10px;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 1.6vw;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 13px;
+    }
   }
 
   div:nth-child(3) {
@@ -319,12 +431,24 @@ const AuditionContentsBlock = styled.div`
     font-size: 20px;
     font-weight: 600;
     margin-top: 10px;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 1.6vw;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
+    }
   }
 
   div:nth-child(4) {
     font-size: 16px;
     font-family: SUIT-Medium;
     margin-top: 10px;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 1.5vw;
+    }
   }
 
   div:nth-child(5) {
@@ -332,6 +456,10 @@ const AuditionContentsBlock = styled.div`
     font-family: SUIT-Medium;
     margin-top: 5px;
     color: #666666;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 1.3vw;
+    }
   }
 `;
 
@@ -342,12 +470,28 @@ const AuditionContentsTheme = styled.div`
   font-family: SUIT-Medium;
   font-size: 17px;
   border-radius: 5px;
+
+  @media screen and (max-width: 1400px) {
+    font-size: 1.6vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const ActorBackground = styled.div`
   width: 100%;
   height: 800px;
   background: #f0f0f0;
+
+  @media screen and (max-width: 1400px) {
+    height: 63vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    height: 1180px;
+  }
 `;
 
 const ActorWrap = styled.div`
@@ -357,6 +501,15 @@ const ActorWrap = styled.div`
   box-sizing: border-box;
   padding: 50px 0;
   position: relative;
+
+  @media screen and (max-width: 1400px) {
+    width: 80%;
+    height: 63vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const ActorImgWrap = styled.div`
@@ -364,11 +517,26 @@ const ActorImgWrap = styled.div`
   display: grid;
   grid-template-columns: 19% 19% 19% 19% 19%;
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 48% 48%;
+  }
 `;
 
 const ActorContentsBlock = styled.div`
   width: 200px;
   height: 300px;
+
+  @media screen and (max-width: 1400px) {
+    width: 15vw;
+    height: 24vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 150px;
+    height: 200px;
+    margin: 0 auto;
+  }
 `;
 
 const ActorImgBlock = styled.div`
@@ -379,11 +547,26 @@ const ActorImgBlock = styled.div`
   overflow: hidden;
   margin-bottom: 8px;
 
+  @media screen and (max-width: 1400px) {
+    width: 15vw;
+    height: 15vw;
+    border-radius: 3vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 150px;
+    height: 150px;
+  }
+
   img {
     width: 200px;
     height: auto;
     position: relative;
     top: -15%;
+
+    @media screen and (max-width: 1400px) {
+      width: 100%;
+    }
   }
 `;
 
@@ -393,6 +576,15 @@ const ActorName = styled.div`
   font-family: SUIT-Medium;
   font-weight: 400;
   margin-bottom: 5px;
+
+  @media screen and (max-width: 1400px) {
+    font-size: 1.6vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+    margin-bottom: 3px;
+  }
 `;
 
 const ActorAge = styled.div`
@@ -401,12 +593,29 @@ const ActorAge = styled.div`
   font-family: SUIT-Medium;
   font-weight: 400;
   color: #666666;
+
+  @media screen and (max-width: 1400px) {
+    font-size: 1.4vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
 `;
 
 const CommunityWrap = styled.div`
   width: 1060px;
   margin: 50px auto;
   position: relative;
+
+  @media screen and (max-width: 1500px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    margin: 50px auto 0 auto;
+  }
 `;
 
 const CommunityBlockWrap = styled.div`
@@ -414,6 +623,10 @@ const CommunityBlockWrap = styled.div`
   display: grid;
   grid-template-columns: 32% 32% 32%;
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 100%;
+  }
 `;
 
 const CommunityBlock = styled.div`
@@ -424,6 +637,11 @@ const CommunityBlock = styled.div`
   padding: 20px;
   box-sizing: border-box;
 
+  @media screen and (max-width: 768px) {
+    margin-bottom: 15px;
+    padding: 25px;
+  }
+
   div:nth-child(1) {
     font-size: 19px;
     font-family: SUIT-Medium;
@@ -431,6 +649,14 @@ const CommunityBlock = styled.div`
     color: black;
     margin-bottom: 15px;
     cursor: pointer;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 1.5vw;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 15px;
+    }
   }
 
   div:nth-child(2) {
@@ -439,6 +665,14 @@ const CommunityBlock = styled.div`
     color: #666666;
     display: inline-block;
     width: 50%;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 1.2vw;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
+    }
   }
 
   div:nth-child(3) {
@@ -448,6 +682,14 @@ const CommunityBlock = styled.div`
     display: inline-block;
     width: 50%;
     text-align: right;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 1.2vw;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
+    }
   }
 `;
 
@@ -455,6 +697,15 @@ const CustomerWrap = styled.div`
   width: 1060px;
   margin: 100px auto;
   position: relative;
+
+  @media screen and (max-width: 1500px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    margin: 50px auto 70px auto;
+  }
 `;
 
 const CustomerBlockWrap = styled.div`
@@ -462,6 +713,10 @@ const CustomerBlockWrap = styled.div`
   display: grid;
   grid-template-columns: 32% 32% 32%;
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 100%;
+  }
 `;
 
 const CustomerBlock = styled.div`
@@ -472,11 +727,24 @@ const CustomerBlock = styled.div`
   padding: 20px;
   box-sizing: border-box;
 
+  @media screen and (max-width: 768px) {
+    margin-bottom: 15px;
+    padding: 25px;
+  }
+
   div:nth-child(1) {
     display: inline-block;
     font-size: 24px;
     font-family: SUIT-Medium;
     font-weight: 600;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 2vw;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 17px;
+    }
   }
 
   img {
@@ -486,6 +754,16 @@ const CustomerBlock = styled.div`
     width: 33px;
     height: 33px;
     margin-left: 10px;
+
+    @media screen and (max-width: 1400px) {
+      width: 2.5vw;
+      height: 2.5vw;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   div:nth-child(3) {
@@ -494,6 +772,15 @@ const CustomerBlock = styled.div`
     font-family: SUIT-Medium;
     font-weight: 500;
     line-height: 25px;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 1.5vw;
+      line-height: 2vw;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 11px;
+    }
   }
 
   button {
@@ -508,6 +795,17 @@ const CustomerBlock = styled.div`
     border-radius: 10px;
     margin-top: 20px;
     letter-spacing: 1px;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 1.4vw;
+      height: 4.5vw;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 160px;
+      height: 40px;
+      font-size: 12px;
+    }
   }
 `;
 
@@ -517,6 +815,10 @@ const ManagementWrap = styled.div`
   grid-template-columns: 48% 48%;
   justify-content: space-between;
   margin-top: 50px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 100%;
+  }
 `;
 
 const ManagementImgBlock = styled.div`
@@ -530,6 +832,11 @@ const ManagementImgBlock = styled.div`
   img {
     width: 105%;
     height: auto;
+
+    @media screen and (max-width: 1400px) {
+      width: auto;
+      height: 220px;
+    }
   }
 `;
 
@@ -538,12 +845,23 @@ const ManagrmentContentsBlock = styled.div`
   flex-direction: column;
   justify-content: center;
 
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 20px;
+  }
+
   div:nth-child(1) {
     font-size: 25px;
     font-family: SUIT-Medium;
     font-weight: 600;
     color: #000000;
     margin-bottom: 30px;
+
+    @media screen and (max-width: 1400px) {
+      margin-bottom: 20px;
+    }
   }
 
   div:nth-child(2) {
@@ -553,6 +871,19 @@ const ManagrmentContentsBlock = styled.div`
     color: #666666;
     margin-bottom: 30px;
     line-height: 25px;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 1.4vw;
+      line-height: 2.2vw;
+      margin-bottom: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
+      line-height: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
   }
 
   button {
@@ -565,12 +896,32 @@ const ManagrmentContentsBlock = styled.div`
     border: 1px solid black;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 3px;
+
+    @media screen and (max-width: 1400px) {
+      width: 22vw;
+      height: 4vw;
+      font-size: 1.4vw;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 200px;
+      height: 40px;
+      font-size: 12px;
+    }
   }
 `;
 
 const AdviserWrap = styled.div`
   width: 1060px;
   margin: 50px auto;
+
+  @media screen and (max-width: 1500px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const AdviserImgWrap = styled.div`
@@ -585,6 +936,10 @@ const AdviserImg = styled.img`
   display: inline-block;
   height: 40px;
   padding: 10px;
+
+  @media screen and (max-width: 1400px) {
+    height: 3vw;
+  }
 `;
 
 const AdviserImgWrap2 = styled.div``;

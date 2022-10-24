@@ -38,6 +38,14 @@ const FooterWrap = styled.div`
   margin: 0 auto;
   padding-top: 50px;
   box-sizing: border-box;
+
+  @media screen and (max-width: 1400px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const FooterTitleBlock = styled.div`
@@ -47,6 +55,17 @@ const FooterTitleBlock = styled.div`
   width: 40%;
   font-family: SUIT-Medium;
   font-size: 12px;
+
+  @media screen and (max-width: 1400px) {
+    font-size: 1.1vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.2vw;
+    line-height: 21px;
+    display: block;
+    width: 30%;
+  }
 `;
 
 const FooterInformationBlock = styled.div`
@@ -57,6 +76,12 @@ const FooterInformationBlock = styled.div`
   font-size: 15px;
   color: rgba(255, 255, 255, 0.7);
   line-height: 25px;
+
+  @media screen and (max-width: 1400px) {
+    font-size: 1.2vw;
+    width: 60%;
+    line-height: 21px;
+  }
 `;
 
 export default Footer;

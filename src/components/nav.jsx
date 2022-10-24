@@ -4,7 +4,7 @@ const Nav = () => {
   return (
     <NavWrap>
       <NavBlock>
-        <img src='image/logo.png' alt='플필로고' />
+        <Logo src='image/logo.png' alt='플필로고' />
         <ul>
           <li>프로필투어</li>
           <li>오디션 공고</li>
@@ -15,6 +15,7 @@ const Nav = () => {
           <li>고객지원</li>
           <li>로그인</li>
         </ul>
+        <Burger src='image/menu-burger.png' alt='menu-burger' />
       </NavBlock>
     </NavWrap>
   );
@@ -32,15 +33,12 @@ const NavWrap = styled.div`
 `;
 
 const NavBlock = styled.div`
-  width: 940px;
+  width: 1020px;
   height: 64px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  img {
-    width: 70px;
-  }
 
   ul {
     display: flex;
@@ -49,11 +47,56 @@ const NavBlock = styled.div`
       list-style: none;
       text-decoration: none;
       font-family: SUIT-Medium;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 17px;
       margin-left: 30px;
       text-align: right;
     }
+  }
+
+  @media screen and (max-width: 1400px) {
+    width: 80%;
+
+    ul {
+      li {
+        font-size: 1.3vw;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 80%;
+
+    ul {
+      display: none;
+      li {
+        font-size: 1.3vw;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
+`;
+
+const Logo = styled.img`
+  width: 70px;
+
+  @media screen and (max-width: 768px) {
+    width: 60px;
+  }
+`;
+
+const Burger = styled.img`
+  display: none;
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    width: 30px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 20px;
   }
 `;
 
