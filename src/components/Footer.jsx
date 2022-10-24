@@ -55,6 +55,7 @@ const FooterTitleBlock = styled.div`
   width: 40%;
   font-family: SUIT-Medium;
   font-size: 12px;
+  cursor: pointer;
 
   @media screen and (max-width: 1400px) {
     font-size: 1.1vw;

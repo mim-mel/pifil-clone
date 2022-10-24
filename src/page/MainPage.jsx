@@ -344,6 +344,8 @@ const SideButton = styled.button`
   border-radius: 10px;
   transform: translate(-100%, -10%);
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 3px;
+  transition: 0.3s;
+  cursor: pointer;
 
   @media screen and (max-width: 1400px) {
     width: 15vw;
@@ -353,6 +355,11 @@ const SideButton = styled.button`
 
   @media screen and (max-width: 768px) {
     display: none;
+  }
+
+  &:hover {
+    background-color: #969696;
+    color: white;
   }
 `;
 
@@ -546,6 +553,7 @@ const ActorImgBlock = styled.div`
   background-color: gray;
   overflow: hidden;
   margin-bottom: 8px;
+  cursor: pointer;
 
   @media screen and (max-width: 1400px) {
     width: 15vw;
@@ -795,6 +803,7 @@ const CustomerBlock = styled.div`
     border-radius: 10px;
     margin-top: 20px;
     letter-spacing: 1px;
+    cursor: pointer;
 
     @media screen and (max-width: 1400px) {
       font-size: 1.4vw;
@@ -896,6 +905,13 @@ const ManagrmentContentsBlock = styled.div`
     border: 1px solid black;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 3px;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #969696;
+      color: white;
+    }
 
     @media screen and (max-width: 1400px) {
       width: 22vw;
