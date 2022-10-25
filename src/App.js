@@ -1,6 +1,6 @@
 import './App.css';
 import Footer from './components/Footer';
-import Nav from './components/Nav';
+import Nav from './components/nav';
 import MainPage from './page/MainPage';
 
 function App() {

@@ -958,5 +958,4 @@ const AdviserImg = styled.img`
   }
 `;
 
-const AdviserImgWrap2 = styled.div``;
 export default MainPage;
