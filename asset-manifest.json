@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/plfil-clone/static/css/main.b3e57481.css",
+    "main.js": "/plfil-clone/static/js/main.11ccea48.js",
+    "index.html": "/plfil-clone/index.html",
+    "main.b3e57481.css.map": "/plfil-clone/static/css/main.b3e57481.css.map",
+    "main.11ccea48.js.map": "/plfil-clone/static/js/main.11ccea48.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b3e57481.css",
+    "static/js/main.11ccea48.js"
+  ]
+}
